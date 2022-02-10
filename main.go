@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"github.com/tidwall/buntdb"
+	"log"
+)
 
 func main() {
-	fmt.Println("asd")
+	db, err := buntdb.Open("data.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 }
