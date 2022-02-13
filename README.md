@@ -1,16 +1,21 @@
 # yemekSepeti
 golang in-memory
 
-## To Build And Run
+## To build and run
 ```
 go build
 ./yemekSepeti
 ```
 
-## After Build, to run the tests 
+## After build, to run the tests 
 ```
 go test ./internal/handlers/commands
 go test ./internal/handlers/queries
+```
+
+## To run with dynamic interval
+```
+TIME_INTERVAL_IN_MINUTES=30 go run main.go
 ```
 
 # API DOC
