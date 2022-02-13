@@ -1,1 +1,1 @@
-web: bin/yemek-sepeti-berkay-ozdemir
+web: bin/yemekSepeti
