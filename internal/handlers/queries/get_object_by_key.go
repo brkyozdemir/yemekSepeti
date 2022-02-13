@@ -11,8 +11,8 @@ func GetObjectByKey(api database.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		key := utils.GetField(r, 0)
 
-		obj := api.Db.GetObjectByKey(key)
+		object := api.Db.GetObjectByKey(key)
 
-		json.NewEncoder(w).Encode(obj)
+		json.NewEncoder(w).Encode(object)
 	}
 }

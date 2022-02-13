@@ -8,8 +8,8 @@ import (
 
 func GetObjectList(api database.API) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		mod := api.Db.GetObjectList()
+		store := api.Db.GetObjectList()
 
-		json.NewEncoder(w).Encode(mod)
+		json.NewEncoder(w).Encode(store)
 	}
 }
