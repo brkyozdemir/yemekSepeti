@@ -1,14 +1,18 @@
 package main
 
 import (
-	"github.com/tidwall/buntdb"
-	"log"
+	"github.com/yemekSepeti/internal/database"
+	"github.com/yemekSepeti/internal/repository/concrete"
+	"github.com/yemekSepeti/internal/routes"
 )
 
 func main() {
-	db, err := buntdb.Open("data.db")
-	if err != nil {
-		log.Fatal(err)
+	db := concrete.NewMemDB()
+
+	api := database.API{
+		Db: db,
 	}
-	defer db.Close()
+
+	rts := routes.Routes(api)
+	routes.Start(rts)
 }
