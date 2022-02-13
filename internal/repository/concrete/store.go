@@ -1,7 +1,5 @@
 package concrete
 
-import "github.com/yemekSepeti/internal/utils"
-
 type MemoryDatabase struct {
 	Store []map[string]string
 }
@@ -36,7 +34,6 @@ func (api *MemoryDatabase) CreateObject(key string, value string) map[string]str
 	store := append(api.Store, map[string]string{key: value})
 
 	api.Store = store
-	utils.WriteFile(store)
 	return map[string]string{key: value}
 }
 
