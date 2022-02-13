@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/yemekSepeti/internal/utils"
+	httpLog "github.com/yemekSepeti/internal/utils/log"
 	"net/http"
 	"strings"
 )
@@ -20,14 +21,17 @@ func Serve(routes []route) http.HandlerFunc {
 					allow = append(allow, route.method)
 					continue
 				}
+
 				ctx := context.WithValue(r.Context(), utils.ContexKey{}, matches[1:])
 				route.handler(w, r.WithContext(ctx))
+
 				return
 			}
 		}
 		if len(allow) > 0 {
 			w.Header().Set("Allow", strings.Join(allow, ", "))
 			http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
+
 			return
 		}
 		http.NotFound(w, r)
@@ -36,5 +40,5 @@ func Serve(routes []route) http.HandlerFunc {
 
 func Start(routes []route) {
 	fmt.Println("Route is starting...")
-	http.ListenAndServe(":9000", Serve(routes))
+	http.ListenAndServe(":9000", httpLog.Logger(Serve(routes)))
 }

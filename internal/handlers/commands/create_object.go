@@ -20,7 +20,10 @@ func CreateObject(api database.API) http.HandlerFunc {
 			object = api.Db.CreateObject(key, value)
 		}
 
-		json.NewEncoder(w).Encode(object)
+		if object != nil {
+			w.WriteHeader(http.StatusCreated)
+		}
 
+		json.NewEncoder(w).Encode(object)
 	}
 }

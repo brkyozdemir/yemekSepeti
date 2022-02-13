@@ -19,6 +19,7 @@ func FlushObjectList(api database.API) http.HandlerFunc {
 			message = map[string]string{"message": "An Error occured!"}
 		}
 
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(message)
 	}
 }

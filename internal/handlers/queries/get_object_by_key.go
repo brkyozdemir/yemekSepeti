@@ -13,6 +13,7 @@ func GetObjectByKey(api database.API) http.HandlerFunc {
 
 		object := api.Db.GetObjectByKey(key)
 
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(object)
 	}
 }

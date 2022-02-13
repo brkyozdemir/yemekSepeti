@@ -8,11 +8,10 @@ import (
 	"time"
 )
 
-func WriteFile(data interface{}) {
+func WriteFile(data interface{}, fileName string) {
 	file, _ := json.MarshalIndent(data, "", " ")
-	currentTime := time.Now()
-	today := currentTime.Format("20060102")
-	_ = ioutil.WriteFile("resources/"+today+"-data.json", file, 0644)
+
+	_ = ioutil.WriteFile(fileName, file, 0644)
 }
 
 func ReadFromResources() []map[string]string {

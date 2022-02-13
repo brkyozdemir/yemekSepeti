@@ -19,7 +19,10 @@ func WriteFile(api database.API) {
 	for {
 		<-jobTicker.timer.C
 		fmt.Println("File will be created")
-		utils.WriteFile(api.Db.GetObjectList())
+		currentTime := time.Now()
+		today := currentTime.Format("20060102")
+		fileName := "resources/" + today + "-data.json"
+		utils.WriteFile(api.Db.GetObjectList(), fileName)
 		fmt.Println("File created")
 		jobTicker.updateTimer()
 	}
