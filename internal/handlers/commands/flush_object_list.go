@@ -12,8 +12,10 @@ func FlushObjectList(api database.API) http.HandlerFunc {
 
 		var message map[string]string
 		if result {
+			// Bad usage of magic strings
 			message = map[string]string{"message": "Store flushed successfully!"}
 		} else {
+			// Bad usage of magic strings
 			message = map[string]string{"message": "An Error occured!"}
 		}
 

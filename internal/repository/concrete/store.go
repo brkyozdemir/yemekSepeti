@@ -6,7 +6,7 @@ type MemoryDatabase struct {
 
 func NewMemDB() *MemoryDatabase {
 	return &MemoryDatabase{
-		Store: []map[string]string{},
+		Store: nil,
 	}
 }
 
@@ -17,6 +17,7 @@ func (api *MemoryDatabase) GetObjectByKey(key string) map[string]string {
 		}
 	}
 
+	// Bad usage of magic strings
 	return map[string]string{"message": "Key not found!"}
 }
 
