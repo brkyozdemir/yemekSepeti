@@ -10,6 +10,6 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /docker-gs-ping
+RUN go build -o yemekSepeti
 
-EXPOSE 8080
+EXPOSE 9000
