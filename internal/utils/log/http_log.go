@@ -13,6 +13,7 @@ type HTTPReqInfo struct {
 	proto    string
 	code     int
 	ipAddr   string
+	host     string
 }
 
 type StatusRecorder struct {
@@ -44,9 +45,10 @@ func Logger(next http.Handler) http.Handler {
 			proto:    r.Proto,
 			code:     recorder.Status,
 			ipAddr:   r.RemoteAddr,
+			host:     r.Host,
 		}
 
-		fmt.Println(colorMap[info.method], info.method, info.uri, info.duration, info.proto, info.ipAddr, info.code)
+		fmt.Println(colorMap[info.method], info.method, info.uri, info.duration, info.proto, info.ipAddr, info.code, info.host)
 	})
 }
 

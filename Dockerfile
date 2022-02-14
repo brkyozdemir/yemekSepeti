@@ -13,6 +13,4 @@ WORKDIR /app
 RUN go build -o main .
 ## Our start command which kicks off
 ## our newly created binary executable
-PORT=8080
-EXPOSE $PORT
 CMD ["/app/main"]

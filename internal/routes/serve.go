@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"fmt"
+	"github.com/yemekSepeti/config"
 	"github.com/yemekSepeti/internal/utils"
 	httpLog "github.com/yemekSepeti/internal/utils/log"
 	"net/http"
@@ -40,5 +41,8 @@ func Serve(routes []route) http.HandlerFunc {
 
 func Start(routes []route) {
 	fmt.Println("Route is starting...")
-	http.ListenAndServe(":9000", httpLog.Logger(Serve(routes)))
+	cfg := config.GetConfig()
+	port := ":" + cfg.App.Port
+
+	http.ListenAndServe(port, httpLog.Logger(Serve(routes)))
 }
