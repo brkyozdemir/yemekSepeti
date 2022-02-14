@@ -70,3 +70,10 @@ TIME_INTERVAL_IN_MINUTES=30 go run main.go
     }
 ]
 ```
+# Heroku base url
+[yemek-sepeti](https://yemek-sepeti-berkay-ozdemir.herokuapp.com)
+
+# Docker
+```
+docker pull berkay94/yemek-sepeti:latest
+```
