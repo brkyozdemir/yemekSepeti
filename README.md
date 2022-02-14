@@ -1,3 +1,5 @@
+![Go](https://img.shields.io/github/go-mod/go-version/vigo/statoo)
+
 # yemekSepeti
 golang in-memory
 
