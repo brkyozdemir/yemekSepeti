@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/yemekSepeti/config"
 	"github.com/yemekSepeti/internal/utils"
 	"io/ioutil"
 	"net/http"
@@ -59,10 +60,13 @@ func TestIntegrationGetObjectByKey(t *testing.T) {
 	})
 	responseBody := bytes.NewBuffer(postBody)
 
-	createReq, _ := http.NewRequest("POST", "http://localhost:9000/api/keys", responseBody)
+	cfg := config.GetConfig()
+	url := cfg.App.BaseUrl + ":" + cfg.App.Port
+
+	createReq, _ := http.NewRequest("POST", url+"/api/keys", responseBody)
 	_, _ = client.Do(createReq)
 
-	res, err := http.NewRequest("GET", fmt.Sprintf("http://localhost:9000/api/keys/%s", key), nil)
+	res, err := http.NewRequest("GET", fmt.Sprintf(url+"/api/keys/%s", key), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

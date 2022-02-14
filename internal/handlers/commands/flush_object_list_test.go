@@ -1,7 +1,9 @@
 package commands
 
 import (
+	"bytes"
 	"encoding/json"
+	"github.com/yemekSepeti/config"
 	"github.com/yemekSepeti/internal/utils"
 	"io/ioutil"
 	"net/http"
@@ -22,19 +24,27 @@ func TestFlushObjectList(t *testing.T) {
 }
 
 func TestIntegrationFlushObjectList(t *testing.T) {
-	api := utils.GetTestDB()
+	client := &http.Client{}
+	utils.Refresh(client)
 
 	key := "key"
 	value := "value"
+	postBody, _ := json.Marshal(map[string]string{
+		key: value,
+	})
+	responseBody := bytes.NewBuffer(postBody)
 
-	api.Db.CreateObject(key, value)
+	cfg := config.GetConfig()
+	url := cfg.App.BaseUrl + ":" + cfg.App.Port
 
-	res, err := http.NewRequest(http.MethodDelete, "http://localhost:9000/api/keys", nil)
+	createReq, _ := http.NewRequest("POST", url+"/api/keys", responseBody)
+	_, _ = client.Do(createReq)
+
+	res, err := http.NewRequest(http.MethodDelete, url+"/api/keys", nil)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	client := &http.Client{}
 	resp, err := client.Do(res)
 	if err != nil {
 		t.Errorf(err.Error())

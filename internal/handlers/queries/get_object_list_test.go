@@ -3,6 +3,7 @@ package queries
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/yemekSepeti/config"
 	"github.com/yemekSepeti/internal/utils"
 	"io/ioutil"
 	"net/http"
@@ -31,6 +32,10 @@ func TestIntegrationGetObjectList(t *testing.T) {
 	utils.Refresh(client)
 
 	value := "value"
+
+	cfg := config.GetConfig()
+	url := cfg.App.BaseUrl + ":" + cfg.App.Port
+
 	for i := 0; i < 10; i++ {
 		index := strconv.Itoa(i)
 		key := "key" + index
@@ -39,12 +44,12 @@ func TestIntegrationGetObjectList(t *testing.T) {
 		})
 		responseBody := bytes.NewBuffer(postBody)
 
-		createReq, _ := http.NewRequest("POST", "http://localhost:9000/api/keys", responseBody)
+		createReq, _ := http.NewRequest("POST", url+"/api/keys", responseBody)
 
 		_, _ = client.Do(createReq)
 	}
 
-	res, err := http.NewRequest("GET", "http://localhost:9000/api/keys", nil)
+	res, err := http.NewRequest("GET", url+"/api/keys", nil)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

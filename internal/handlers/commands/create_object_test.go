@@ -3,6 +3,7 @@ package commands
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/yemekSepeti/config"
 	"github.com/yemekSepeti/internal/utils"
 	"io/ioutil"
 	"net/http"
@@ -40,7 +41,10 @@ func TestIntegrationCreateObject(t *testing.T) {
 	})
 	responseBody := bytes.NewBuffer(postBody)
 
-	res, err := http.NewRequest("POST", "http://localhost:9000/api/keys", responseBody)
+	cfg := config.GetConfig()
+	url := cfg.App.BaseUrl + ":" + cfg.App.Port
+
+	res, err := http.NewRequest("POST", url+"/api/keys", responseBody)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
