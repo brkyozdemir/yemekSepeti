@@ -1,4 +1,5 @@
 .env
 
-/resources/*-data.json
-/resources/*.log
+resources/*-data.json
+resources/*.log
+
